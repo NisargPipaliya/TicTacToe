@@ -32,14 +32,17 @@ public class TicTacToe implements Game2Player {
 
         emptyCells = new LinkedHashSet<>(9);
         initEmptyCells();
-
+        winningSym = ' ';
         sc = new Scanner(System.in);
     }
 
     private void initEmptyCells() {
         SecureRandom randomNumGen = new SecureRandom();
         while (emptyCells.size() != 9) {
-            emptyCells.add(randomNumGen.nextInt(10));
+            int i = randomNumGen.nextInt(10);
+            if(i == 0)
+                i++;
+            emptyCells.add(i);
         }
 
     }
@@ -217,10 +220,15 @@ public class TicTacToe implements Game2Player {
         System.out.println("\n\nCurrent Status");
         printStatus();
         while (isGameOver()) {
+
             List<Integer> rowAndCol = getInputFromUser();
             userMove(userName, userSym, rowAndCol.get(0), rowAndCol.get(1));
             System.out.println("Board");
             printStatus();
+            if((X+O) == 9){
+                isGameOver();
+                break;
+            }
             System.out.println("Computer's Turn");
             rowAndCol = getComputerInput();
             userMove("Computer", computerSym, rowAndCol.getFirst(), rowAndCol.get(1));
@@ -231,8 +239,10 @@ public class TicTacToe implements Game2Player {
 
         if (winningSym == userSym)
             System.out.printf("Winner is  %s\n", userName);
-        else
+        else if(winningSym == computerSym)
             System.out.println("Winner is Computer.");
+        else
+            System.out.println("It's A Draw");
 
     }
 
