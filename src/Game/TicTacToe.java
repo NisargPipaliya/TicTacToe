@@ -211,7 +211,7 @@ public class TicTacToe implements Game2Player {
         if (result) {
             winningSym = board.get(2).getFirst();
         }
-        return result;
+        return result && winningSym != ' ';
     }
 
     @Override
