@@ -1,6 +1,5 @@
 package Game;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -92,11 +91,70 @@ public class TicTacToe implements Game2Player{
         }
         sc.close();
     }
+
+    public List<Integer> getInputFromUser(){
+        int idx = 0;
+        System.out.println("Where to place your symbol?  ");
+        List<Integer> rowAndCol;
+        Scanner sc = new Scanner(System.in);
+        while(true) {
+            idx = sc.nextInt();
+            if(idx >=1 && idx <=9){
+                rowAndCol = getRowAndColFromIdx(idx);
+                if(!checkCollision(rowAndCol.get(0), rowAndCol.get(1))){
+                    break;
+                }else{
+                    System.out.println("\n!!! The Selected Cell is already filled !!!");
+                }
+            }else{
+                System.out.println("\n!!! Please Select Valid Index");
+            }
+        }
+        sc.close();
+        return rowAndCol;
+    }
+
+    public List<Integer> getRowAndColFromIdx(int idx){
+        List<Integer> rowAndCol =  new ArrayList<>(2);
+        rowAndCol.add((idx-1)/3);
+        rowAndCol.add((idx-1)%3);
+        return rowAndCol;
+    }
+    public boolean checkCollision(int row, int col){
+        return this.board.get(row).get(col) != ' ';
+    }
+
+    public boolean isGameOver(){
+        if(X >=3 || O >= 3){
+            return checkHorizontal() || checkVertical() || checkDiagonal(); 
+        }
+        return false;
+    }
+
+    private boolean checkDiagonal() {
+    }
+
+    private boolean checkVertical() {
+    }
+
+    public boolean checkHorizontal(){
+        for(int row = 0; row < boardSize; row++){
+            for(int col = 0; col < boardSize; col++){
+                
+            }
+        }
+    }
     @Override
     public void start() {
         System.out.println("\n\nLet's Begin :)");
         System.out.println("Current Status of Board");
-        printStatus();
+        while(isGameOver()) {
+            printStatus();
+            List<Integer> rowAndCol = getInputFromUser();
+            userMove(userName, userSym, rowAndCol.get(0), rowAndCol.get(1));
+        }
+
+
     }
 
     @Override
@@ -105,8 +163,12 @@ public class TicTacToe implements Game2Player{
     }
 
     @Override
-    public boolean userMove(String userName, String userSym, int index) {
-        return false;
+    public void userMove(String userName, char userSym, int row, int col) {
+        if(userSym == 'X')
+            X++;
+        else 
+            O++;
+        board.get(row).set(col,userSym);
     }
 
     @Override
