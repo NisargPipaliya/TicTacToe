@@ -181,37 +181,41 @@ public class TicTacToe implements Game2Player {
         boolean result = board.getFirst().getFirst() == board.get(1).get(0) && board.get(1).get(0) == board.get(2).get(0);
         if (result) {
             winningSym = board.getFirst().getFirst();
-            return result;
+            return winningSym != ' ';
         }
         result = board.getFirst().get(1) == board.get(1).get(1) && board.get(1).get(1) == board.get(2).get(1);
         if (result) {
             winningSym = board.getFirst().get(1);
-            return result;
+            return winningSym != ' ';
         }
         result = board.getFirst().get(2) == board.get(1).get(2) && board.get(1).get(2) == board.get(2).get(2);
         if (result) {
             winningSym = board.getFirst().get(2);
+            return winningSym != ' ';
         }
-        return result && winningSym != ' ';
+        return false;
     }
 
     public boolean checkHorizontal() {
         boolean result = board.getFirst().get(0) == board.getFirst().get(1) && board.getFirst().get(1) == board.getFirst().get(2);
         if (result) {
             winningSym = board.getFirst().getFirst();
-            return result;
+            return winningSym != ' ';
         }
         result = board.get(1).get(0) == board.get(1).get(1) && board.get(1).get(1) == board.get(1).get(2);
         if (result) {
             winningSym = board.get(1).getFirst();
-            return result;
+            return winningSym != ' ';
+
 
         }
         result = board.get(2).get(0) == board.get(2).get(1) && board.get(2).get(1) == board.get(2).get(2);
         if (result) {
             winningSym = board.get(2).getFirst();
+            return winningSym != ' ';
+
         }
-        return result && winningSym != ' ';
+        return false;
     }
 
     @Override
@@ -225,7 +229,7 @@ public class TicTacToe implements Game2Player {
             userMove(userName, userSym, rowAndCol.get(0), rowAndCol.get(1));
             System.out.println("Board");
             printStatus();
-            if((X+O) == 9){
+            if((X+O) == 9 || !isGameOver()){
                 isGameOver();
                 break;
             }
