@@ -9,7 +9,8 @@ public class TicTacToe implements Game2Player {
     String userName;
     char userSym;
     char computerSym;
-    private int currentSocre;
+    private int currentUserSocre;
+    private int currentComputerScore;
     private int numberOfRematch;
     private final int boardSize = 3;
     private List<List<Character>> board;
@@ -18,40 +19,53 @@ public class TicTacToe implements Game2Player {
     private char winningSym;
     private Scanner sc;
     private Set<Integer> emptyCells;
+    private boolean playGame;
 
     public TicTacToe() {
-        this.currentSocre = 0;
+        this.currentUserSocre = 0;
+        this.currentComputerScore = 0;
         this.numberOfRematch = 0;
         this.board = new ArrayList<List<Character>>(boardSize);
-        for (int i = 0; i < boardSize; i++) {
+        for (int row = 0; row < boardSize; row++) {
             this.board.add(new ArrayList<>(boardSize));
-            for (int j = 0; j < boardSize; j++) {
-                board.get(i).add(' ');
+            for (int col = 0; col < boardSize; col++) {
+                board.get(row).add(' ');
             }
         }
 
         emptyCells = new LinkedHashSet<>(9);
         initEmptyCells();
-        winningSym = ' ';
+
+        // Need to Open scanner here as if we open it locally and then close it in that method, then it will close system.in and will create problem for other scanners in the program.
         sc = new Scanner(System.in);
+
+        playGame = true;
     }
 
     private void initEmptyCells() {
         SecureRandom randomNumGen = new SecureRandom();
         while (emptyCells.size() != 9) {
             int i = randomNumGen.nextInt(10);
-            if(i == 0)
+            if (i == 0)
                 i++;
             emptyCells.add(i);
         }
+        winningSym = ' ';
 
+        for (int row = 0; row < boardSize; row++) {
+            this.board.add(new ArrayList<>(boardSize));
+            for (int col = 0; col < boardSize; col++) {
+                board.get(row).set(col, ' ');
+            }
+        }
     }
 
     @Override
     public void printInstructions() {
         System.out.println("******************************");
-        System.out.printf("%20s", "Welcome\n");
-        System.out.println("Press Q to Quit on going game.\n\n");
+        System.out.printf("%20s", "Welcome \uD83D\uDC4B \uD83D\uDC4B \n");
+        //
+        System.out.println("⚠️Press Q to Quit on going game.⚠️ \n\n");
         System.out.println("The board will be as");
         for (int i = 0; i < boardSize; i++) {
             for (int j = 0; j < boardSize; j++) {
@@ -62,7 +76,7 @@ public class TicTacToe implements Game2Player {
             }
             if (i != (boardSize - 1))
                 System.out.println("---------");
-        }
+        }//:air
 
         System.out.println("\nYou are suppose to provide input as number of box you want to place your symbol");
         int k = 1;
@@ -111,7 +125,7 @@ public class TicTacToe implements Game2Player {
                 computerSym = 'O';
                 break;
             } else {
-                System.out.println("Please Enter Valid Symbol!!!");
+                System.out.println("Kya kar raha hai bhai tu \uD83D\uDE21 ? 1 ya 2 daal ");
             }
         }
 
@@ -137,13 +151,13 @@ public class TicTacToe implements Game2Player {
                     if (!checkCollision(rowAndCol.get(0), rowAndCol.get(1))) {
                         break;
                     } else {
-                        System.out.println("\n!!! The Selected Cell is already filled !!!");
+                        System.out.println("\n⚠️⚠️ The Selected Cell is already filled ⚠️⚠️");
                     }
                 } else {
-                    System.out.println("\n!!! Please Select Valid Index");
+                    System.out.println("\nKya kar raha hai bhai tu \uD83D\uDE21 ?");
                 }
             } else {
-                System.out.println("\n!!! Please Select Valid Index2");
+                System.out.println("\nBhai 1 To 9 mai number daal \uD83D\uDE21");
             }
         }
 
@@ -163,9 +177,9 @@ public class TicTacToe implements Game2Player {
 
     public boolean isGameOver() {
         if (X >= 3 || O >= 3) {
-            return !(checkHorizontal() || checkVertical() || checkDiagonal());
+            return (checkHorizontal() || checkVertical() || checkDiagonal());
         }
-        return true;
+        return false;
     }
 
     private boolean checkDiagonal() {
@@ -219,43 +233,47 @@ public class TicTacToe implements Game2Player {
     }
 
     @Override
-    public void start() {
-        System.out.println("\n\nLet's Begin :)");
-        System.out.println("\n\nCurrent Status");
-        printStatus();
-        while (isGameOver()) {
-
-            List<Integer> rowAndCol = getInputFromUser();
-            userMove(userName, userSym, rowAndCol.get(0), rowAndCol.get(1));
-            System.out.println("Board");
+    public void play() {
+        while (playGame) {
+            playGame = false;
+            System.out.println("\n\nLet's Begin \uD83C\uDFB2");
+            System.out.println("\n\nCurrent Status");
             printStatus();
-            if((X+O) == 9 || !isGameOver()){
-                isGameOver();
-                break;
+            while (!isGameOver()) {
+                System.out.printf("========== %s's Turn ==========\n", userName);
+                List<Integer> rowAndCol = getInputFromUser();
+                userMove(userName, userSym, rowAndCol.get(0), rowAndCol.get(1));
+                System.out.println("Board");
+                printStatus();
+                if (isGameOver() || (X + O) == 9 ) {
+                    break;
+                }
+                System.out.println("========== Computer's Turn ==========");
+                rowAndCol = getComputerInput();
+                userMove("Computer", computerSym, rowAndCol.getFirst(), rowAndCol.get(1));
+                System.out.println("Board");
+                printStatus();
+                System.out.println("\n\n");
             }
-            System.out.println("Computer's Turn");
-            rowAndCol = getComputerInput();
-            userMove("Computer", computerSym, rowAndCol.getFirst(), rowAndCol.get(1));
-            System.out.println("Board");
-            printStatus();
-            System.out.println("\n\n");
+
+            if (winningSym == userSym)
+                System.out.printf("You Won %s, \uD83C\uDF89\uD83D\uDCAB\n", userName);
+            else if (winningSym == computerSym)
+                System.out.println("Winner is Computer.");
+            else
+                System.out.println("It's A Draw");
+            playGame = askForRematch();
+            ;
+            ;
         }
-
-        if (winningSym == userSym)
-            System.out.printf("Winner is  %s\n", userName);
-        else if(winningSym == computerSym)
-            System.out.println("Winner is Computer.");
-        else
-            System.out.println("It's A Draw");
-
     }
 
     private List<Integer> getComputerInput() {
         int idx = emptyCells.iterator().next();
         emptyCells.remove(idx);
         List<Integer> resultIdx = new ArrayList<>(2);
-        resultIdx.add((idx-1)/3);
-        resultIdx.add((idx-1)%3);
+        resultIdx.add((idx - 1) / 3);
+        resultIdx.add((idx - 1) % 3);
         return resultIdx;
     }
 
@@ -276,9 +294,37 @@ public class TicTacToe implements Game2Player {
     }
 
     @Override
-    public boolean rematch() {
-        return false;
+    public boolean askForRematch() {
+        System.out.println("Ek aur match ? (Y for Yes, N for No): ");
+        while (true) {
+            String rematchOpt = sc.nextLine();
+            if (rematchOpt.equals("Y") || rematchOpt.equals("y")) {
+                numberOfRematch++;
+                if (winningSym == userSym) {
+                    currentUserSocre++;
+                } else {
+                    currentComputerScore++;
+                }
+                printStats();
+                getSymFromUser();
+                initEmptyCells();
+                return true;
+            } else if (rematchOpt.equals("N") || rematchOpt.equals("n")) {
+                return false;
+            } else {
+                System.out.println("Bhai Valid Input daal na.");
+            }
+        }
     }
+
+    private void printStats() {
+        System.out.println("******************************");
+        System.out.println("Let's Look at stats till now.");
+        System.out.printf("\n\n%s's Score: %d\n", this.userName, this.currentUserSocre);
+        System.out.printf("Computer's Score: %d\n", this.currentComputerScore);
+        System.out.println("******************************");
+    }
+
 
     @Override
     public void printStatus() {
@@ -293,23 +339,4 @@ public class TicTacToe implements Game2Player {
                 System.out.println("---------");
         }
     }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public int getCurrentSocre() {
-        return currentSocre;
-    }
-
-    public int getNumberOfRematch() {
-        return numberOfRematch;
-    }
-
 }
-
-

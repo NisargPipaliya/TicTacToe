@@ -7,6 +7,7 @@ public class Main {
     public static void main(String[] args) {
         Game2Player game = new TicTacToe();
         game.printInstructions();
-        game.start();
+        game.play();
+
     }
 }
