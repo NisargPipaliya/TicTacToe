@@ -11,7 +11,7 @@ public class TicTacToe implements Game2Player {
     char computerSym;
     private int currentUserSocre;
     private int currentComputerScore;
-    private int numberOfRematch;
+    private int numberOfMatches;
     private final int boardSize = 3;
     private List<List<Character>> board;
     private int X;
@@ -24,7 +24,7 @@ public class TicTacToe implements Game2Player {
     public TicTacToe() {
         this.currentUserSocre = 0;
         this.currentComputerScore = 0;
-        this.numberOfRematch = 0;
+        this.numberOfMatches = 1;
         this.board = new ArrayList<List<Character>>(boardSize);
         for (int row = 0; row < boardSize; row++) {
             this.board.add(new ArrayList<>(boardSize));
@@ -256,15 +256,18 @@ public class TicTacToe implements Game2Player {
                 System.out.println("\n\n");
             }
 
-            if (winningSym == userSym)
+            if (winningSym == userSym) {
                 System.out.printf("You Won %s, \uD83C\uDF89\uD83D\uDCAB\n", userName);
-            else if (winningSym == computerSym)
+                currentUserSocre++;
+            }
+            else if (winningSym == computerSym) {
                 System.out.println("Winner is Computer.");
+                currentComputerScore++;
+            }
             else
                 System.out.println("It's A Draw");
+            printStats();
             playGame = askForRematch();
-            ;
-            ;
         }
     }
 
@@ -299,12 +302,7 @@ public class TicTacToe implements Game2Player {
         while (true) {
             String rematchOpt = sc.nextLine();
             if (rematchOpt.equals("Y") || rematchOpt.equals("y")) {
-                numberOfRematch++;
-                if (winningSym == userSym) {
-                    currentUserSocre++;
-                } else {
-                    currentComputerScore++;
-                }
+                numberOfMatches++;
                 printStats();
                 getSymFromUser();
                 initEmptyCells();
@@ -320,7 +318,8 @@ public class TicTacToe implements Game2Player {
     private void printStats() {
         System.out.println("******************************");
         System.out.println("Let's Look at stats till now.");
-        System.out.printf("\n\n%s's Score: %d\n", this.userName, this.currentUserSocre);
+        System.out.printf("Number of Matches: %d\n", numberOfMatches);
+        System.out.printf("%s's Score: %d\n", this.userName, this.currentUserSocre);
         System.out.printf("Computer's Score: %d\n", this.currentComputerScore);
         System.out.println("******************************");
     }
