@@ -274,10 +274,7 @@ public class TicTacToe implements Game2Player {
     private List<Integer> getComputerInput() {
         int idx = emptyCells.iterator().next();
         emptyCells.remove(idx);
-        List<Integer> resultIdx = new ArrayList<>(2);
-        resultIdx.add((idx - 1) / 3);
-        resultIdx.add((idx - 1) % 3);
-        return resultIdx;
+        return getRowAndColFromIdx(idx);
     }
 
     @Override
