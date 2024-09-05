@@ -114,13 +114,12 @@ public class TicTacToe implements Game2Player {
         while (true) {
             System.out.println("\nSelect your symbol (O or X):");
             System.out.println("Press 1 for 'O', Press 2 for X.");
-            int inputSym = sc.nextInt();
-            sc.nextLine();
-            if (inputSym == 1) {
+            String inputSym = sc.nextLine();
+            if ("1".equals(inputSym)) {
                 userSym = 'O';
                 computerSym = 'X';
                 break;
-            } else if (inputSym == 2) {
+            } else if ("2".equals(inputSym)) {
                 userSym = 'X';
                 computerSym = 'O';
                 break;
