@@ -143,7 +143,7 @@ public class TicTacToe implements Game2Player {
             }
 //            System.out.println("\n\n"+s+"\n\n");
             if (s.matches("\\d{1}")) {
-                idx = Integer.parseInt(s.trim());
+                idx = Integer.parseInt(s);
                 emptyCells.remove(idx);
                 if (idx >= 1 && idx <= 9) {
                     rowAndCol = getRowAndColFromIdx(idx);
@@ -311,7 +311,7 @@ public class TicTacToe implements Game2Player {
         }
     }
 
-    private void printStats() {
+    private void printStats() { // printBoardStats
         System.out.println("******************************");
         System.out.println("Let's Look at stats till now.");
         System.out.printf("Number of Matches: %d\n", numberOfMatches);

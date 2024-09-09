@@ -8,6 +8,5 @@ public class Main {
         Game2Player game = new TicTacToe();
         game.printInstructions();
         game.play();
-
     }
 }
