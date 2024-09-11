@@ -1,4 +1,4 @@
-package Game;
+package game;
 
 import java.security.SecureRandom;
 import java.util.*;
@@ -19,6 +19,7 @@ public class TicTacToe implements Game2Player {
     private char winningSym;
     private Scanner sc;
     private Set<Integer> emptyCells;
+
     private boolean playGame;
 
     public TicTacToe() {
@@ -131,6 +132,8 @@ public class TicTacToe implements Game2Player {
     }
 
     public List<Integer> getInputFromUser() {
+        // have two function,
+        // one for input and one for validation.
         int idx = 0;
         System.out.println("Where to place your symbol?  ");
         List<Integer> rowAndCol;
@@ -233,6 +236,8 @@ public class TicTacToe implements Game2Player {
 
     @Override
     public void play() {
+        // Make it do While
+        this.printInstructions();
         while (playGame) {
             playGame = false;
             System.out.println("\n\nLet's Begin \uD83C\uDFB2");
@@ -279,7 +284,7 @@ public class TicTacToe implements Game2Player {
     @Override
     public void quit() {
         sc.close();
-        System.out.println("The Game Has Been Terminated!!!!");
+        System.out.println("The game Has Been Terminated!!!!");
         exit(0);
     }
 
@@ -298,10 +303,10 @@ public class TicTacToe implements Game2Player {
         while (true) {
             String rematchOpt = sc.nextLine();
             if (rematchOpt.equals("Y") || rematchOpt.equals("y")) {
-                numberOfMatches++;
                 printStats();
                 getSymFromUser();
                 initEmptyCells();
+                numberOfMatches++;
                 return true;
             } else if (rematchOpt.equals("N") || rematchOpt.equals("n")) {
                 return false;
@@ -311,7 +316,8 @@ public class TicTacToe implements Game2Player {
         }
     }
 
-    private void printStats() { // printBoardStats
+    @Override
+    public void printStats() { // printBoardStats
         System.out.println("******************************");
         System.out.println("Let's Look at stats till now.");
         System.out.printf("Number of Matches: %d\n", numberOfMatches);

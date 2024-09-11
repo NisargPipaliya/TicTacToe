@@ -1,4 +1,4 @@
-# TicTacToe Game 🎲 Implementation details
+# TicTacToe game 🎲 Implementation details
 
 ## Interface
 
@@ -77,7 +77,7 @@
     - Call exit(0)
 
 ---
-# Game Play
+# game Play
 ![img.png](img.png)
 
 ![img_2.png](img_2.png)
