@@ -1,0 +1,7 @@
+package updated;
+
+public class Main {
+    public static void main(String[] args){
+
+    }
+}

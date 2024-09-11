@@ -1,4 +1,4 @@
-package game;
+package old.game;
 
 public interface Game2Player {
     public void printInstructions();

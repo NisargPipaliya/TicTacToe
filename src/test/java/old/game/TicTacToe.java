@@ -1,4 +1,4 @@
-package game;
+package old.game;
 
 import java.security.SecureRandom;
 import java.util.*;
@@ -66,7 +66,7 @@ public class TicTacToe implements Game2Player {
         System.out.println("******************************");
         System.out.printf("%20s", "Welcome \uD83D\uDC4B \uD83D\uDC4B \n");
         //
-        System.out.println("⚠️Press Q to Quit on going game.⚠️ \n\n");
+        System.out.println("⚠️Press Q to Quit on going old.game.⚠️ \n\n");
         System.out.println("The board will be as");
         for (int i = 0; i < boardSize; i++) {
             for (int j = 0; j < boardSize; j++) {
@@ -284,7 +284,7 @@ public class TicTacToe implements Game2Player {
     @Override
     public void quit() {
         sc.close();
-        System.out.println("The game Has Been Terminated!!!!");
+        System.out.println("The old.game Has Been Terminated!!!!");
         exit(0);
     }
 

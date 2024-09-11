@@ -1,4 +1,4 @@
-# TicTacToe game 🎲 Implementation details
+# TicTacToe old.game 🎲 Implementation details
 
 ## Interface
 
@@ -28,7 +28,7 @@
     - X, O -> Integer variable to keep track of number of moves made
     - Scanner Object -> to take input in all the methods
     - EmptyCells -> set of integers between 1 to 9, randomly
-    - playGame -> boolean variable indicating that should continue playing game or not
+    - playGame -> boolean variable indicating that should continue playing old.game or not
 - ### Methods
   - initEmptyCells() 
     - Initialize emptyCells set
@@ -36,7 +36,7 @@
     - Initialize `board`
   - printInstructions()
     - Prints `welcome` message
-    - Prints general instruction to play game
+    - Prints general instruction to play old.game
     - Get input of `userName` and `userSym`
     - Calls `getSymFromUser` 
     - Calls `printDetails`
@@ -70,14 +70,14 @@
   - printStatus()
     - Print current state of board
   - printStats()
-    - Print game stats i.e. number of matches played, UserScore, ComputerScore
+    - Print old.game stats i.e. number of matches played, UserScore, ComputerScore
   - quit()
     - Close Scanner i/p stream
     - Prints termination message
     - Call exit(0)
 
 ---
-# game Play
+# old.game Play
 ![img.png](img.png)
 
 ![img_2.png](img_2.png)

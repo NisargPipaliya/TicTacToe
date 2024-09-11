@@ -1,5 +1,7 @@
-import game.Game2Player;
-import game.TicTacToe;
+package old;
+
+import old.game.Game2Player;
+import old.game.TicTacToe;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
