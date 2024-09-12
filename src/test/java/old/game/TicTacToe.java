@@ -27,6 +27,7 @@ public class TicTacToe implements Game2Player {
         this.currentComputerScore = 0;
         this.numberOfMatches = 1;
         this.board = new ArrayList<List<Character>>(boardSize);
+
         for (int row = 0; row < boardSize; row++) {
             this.board.add(new ArrayList<>(boardSize));
             for (int col = 0; col < boardSize; col++) {
