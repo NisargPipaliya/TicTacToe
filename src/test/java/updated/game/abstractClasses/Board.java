@@ -131,6 +131,6 @@ public abstract class Board {
                 cliResult.append("\n");
             }
         }
-        System.out.println(cliResult.toString());
+        System.out.print(cliResult.toString());
     }
 }

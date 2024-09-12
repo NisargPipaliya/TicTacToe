@@ -59,6 +59,8 @@ public class Human extends Gamer {
             if(this.validateInput(s)){
                 int index = Integer.parseInt(s);
                 if (!game.getBoard().checkCollision(index)) {
+                    game.getBoard().emptyCells.remove(index);
+                    this.incrementNumberOfMoves();
                   return getRowAndColFromIdx(index);
                 }
                 System.out.println("\n⚠️⚠️ The Selected Cell is already filled ⚠️⚠️");

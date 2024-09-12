@@ -14,7 +14,8 @@ public class EasyComputer extends Gamer {
     @Override
     public List<Integer> getInputFromUser(Game game) {
         int index = game.getBoard().emptyCells.iterator().next();
-        game.getBoard().emptyCells.iterator().remove();
+        game.getBoard().emptyCells.remove(index);
+        this.incrementNumberOfMoves();
         return getRowAndColFromIdx(index);
     }
 
