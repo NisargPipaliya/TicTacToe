@@ -76,7 +76,8 @@ public class TicTacToe extends Game {
                 board.userMove(human, rowAndCol.get(0), rowAndCol.get(1));
                 System.out.println("Board");
                 this.board.printBoard();
-                if (isGameOver(human.getNumberOfMoves(),computer.getNumberOfMoves()) || (human.getNumberOfMoves() + computer.getNumberOfMoves()) == (TicTacToeBoard.BOARD_SIZE * TicTacToeBoard.BOARD_SIZE) ) {
+                if (isGameOver(human.getNumberOfMoves(),computer.getNumberOfMoves()) || ((human.getNumberOfMoves() + computer.getNumberOfMoves()) == (TicTacToeBoard.BOARD_SIZE * TicTacToeBoard.BOARD_SIZE)) ) {
+                    System.out.println("IN IF");
                     break;
                 }
                 System.out.println("========== Computer's Turn ==========");
@@ -115,6 +116,7 @@ public class TicTacToe extends Game {
                 this.printStats();
                 human.reset();
                 computer.reset();
+//                System.out.println("Human: "+human.getNumberOfMoves());
                 human.getSymbolFromUser();
                 computer.setSymbol((human.getSymbol() == 'O') ? 'X' : 'O');
                 this.board.initEmptyCells();
