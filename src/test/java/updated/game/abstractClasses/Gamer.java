@@ -10,13 +10,16 @@ import java.util.List;
 public abstract class Gamer {
     protected String gamerName;
     @Setter
-    protected char symbol;
-    protected int currentScore;
-    protected int numberOfMoves;
+    public char symbol;
+    public int currentScore;
+    public int numberOfMoves;
 
     public abstract void getSymbolFromUser();
     public abstract List<Integer> getInputFromUser(Game game);
-
+    public void reset(){
+        numberOfMoves = 0;
+        symbol = ' ';
+    }
     public void printDetails(){
         System.out.println("******************************");
         System.out.printf("%25s", "Details Received are as: \n");

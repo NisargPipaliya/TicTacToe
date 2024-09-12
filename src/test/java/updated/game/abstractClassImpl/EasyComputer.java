@@ -1,6 +1,6 @@
 package updated.game.abstractClassImpl;
 
-import updated.game.abstractClasses.Game;
+import updated.game.abstractClasses .Game;
 import updated.game.abstractClasses.Gamer;
 
 import java.util.List;
@@ -15,7 +15,6 @@ public class EasyComputer extends Gamer {
     public List<Integer> getInputFromUser(Game game) {
         int index = game.getBoard().emptyCells.iterator().next();
         game.getBoard().emptyCells.remove(index);
-        this.incrementNumberOfMoves();
         return getRowAndColFromIdx(index);
     }
 

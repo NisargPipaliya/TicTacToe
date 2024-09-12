@@ -18,10 +18,5 @@ public abstract class Game {
     public abstract boolean askForRematch();
     public abstract void printStats();
     public abstract void quit();
-    public boolean isGameOver(int gamer1Moves, int gamer2Moves){
-        if (gamer1Moves >= 3 || gamer2Moves >= 3) {
-            return (this.board.checkHorizontal() || this.board.checkVertical() || this.board.checkDiagonal());
-        }
-        return false;
-    }
+    public abstract boolean isGameOver(int gamer1Moves, int gamer2Moves);
 }

@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 import static java.lang.System.exit;
 import updated.game.abstractClasses.*;
+
 public class TicTacToe extends Game {
     Human human;
     Gamer computer;
@@ -67,16 +68,15 @@ public class TicTacToe extends Game {
         do{
             System.out.println("\n\nLet's Begin \uD83C\uDFB2");
             System.out.println("\n\nCurrent Status");
-            board.printBoard();
-            int humanMoves = human.getNumberOfMoves(), computerMoves = computer.getNumberOfMoves();
+            this.board.printBoard();
 
-            while (!isGameOver(humanMoves,computerMoves)) {
+            while (!isGameOver(human.getNumberOfMoves(),computer.getNumberOfMoves())) {
                 System.out.printf("========== %s's Turn ==========\n", human.getGamerName());
                 List<Integer> rowAndCol = human.getInputFromUser(this);
                 board.userMove(human, rowAndCol.get(0), rowAndCol.get(1));
                 System.out.println("Board");
                 this.board.printBoard();
-                if (isGameOver(humanMoves,computerMoves) || (humanMoves + computerMoves) == TicTacToeBoard.BOARD_SIZE * TicTacToeBoard.BOARD_SIZE ) {
+                if (isGameOver(human.getNumberOfMoves(),computer.getNumberOfMoves()) || (human.getNumberOfMoves() + computer.getNumberOfMoves()) == (TicTacToeBoard.BOARD_SIZE * TicTacToeBoard.BOARD_SIZE) ) {
                     break;
                 }
                 System.out.println("========== Computer's Turn ==========");
@@ -113,13 +113,14 @@ public class TicTacToe extends Game {
             String rematchOpt = sc.nextLine();
             if ("Y".equalsIgnoreCase(rematchOpt)) {
                 this.printStats();
+                human.reset();
+                computer.reset();
                 human.getSymbolFromUser();
+                computer.setSymbol((human.getSymbol() == 'O') ? 'X' : 'O');
                 this.board.initEmptyCells();
                 this.numberOfMatches++;
-                sc.close();
                 return true;
             } else if ("N".equalsIgnoreCase(rematchOpt)) {
-                sc.close();
                 return false;
             } else {
                 System.out.println("Bhai Valid Input daal na.");
@@ -143,5 +144,13 @@ public class TicTacToe extends Game {
         System.out.println("The old.game Has Been Terminated!!!!");
         exit(0);
 
+    }
+
+    @Override
+    public boolean isGameOver(int gamer1Moves, int gamer2Moves) {
+        if (gamer1Moves >= 3 || gamer2Moves >= 3) {
+            return (this.board.checkHorizontal() || this.board.checkVertical() || this.board.checkDiagonal());
+        }
+        return false;
     }
 }

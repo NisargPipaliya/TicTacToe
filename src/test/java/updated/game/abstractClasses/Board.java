@@ -53,7 +53,7 @@ public abstract class Board {
         this.board.get(row).set(col, gamer.getSymbol());
     }
 
-    boolean checkDiagonal() {
+    public boolean checkDiagonal() {
         boolean primaryDiagonalResult = true;
         boolean secondaryDiagonalResult = true;
         char primaryDiagonalSymbol = this.board.getFirst().getFirst();
@@ -77,10 +77,11 @@ public abstract class Board {
                 break;
             }
         }
-        return primaryDiagonalResult | secondaryDiagonalResult;
+
+        return (primaryDiagonalResult | secondaryDiagonalResult)&&(primaryDiagonalSymbol != ' ' || secondaryDiagonalSymbol != ' ');
     }
 
-    boolean checkVertical() {
+    public boolean checkVertical() {
         boolean result = true;
         char currentSymbol = ' ';
         for(int col = 0; col < BOARD_SIZE; col++){
@@ -94,10 +95,10 @@ public abstract class Board {
                 break;
             }
         }
-        return result;
+        return this.winningSym != ' ';
     }
 
-    boolean checkHorizontal() {
+    public boolean checkHorizontal() {
         boolean result = true;
         char currentSymbol = ' ';
         for(int row = 0; row < BOARD_SIZE; row++){
@@ -111,7 +112,7 @@ public abstract class Board {
                 break;
             }
         }
-        return result;
+        return this.winningSym != ' ';
     }
 
     public void printBoard() {

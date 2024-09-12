@@ -23,6 +23,7 @@ public class Human extends Gamer {
                 System.out.println("!! Please enter your name !!");
             }
             else {
+                this.gamerName = s.trim();
                 break;
             }
         }
@@ -60,7 +61,6 @@ public class Human extends Gamer {
                 int index = Integer.parseInt(s);
                 if (!game.getBoard().checkCollision(index)) {
                     game.getBoard().emptyCells.remove(index);
-                    this.incrementNumberOfMoves();
                   return getRowAndColFromIdx(index);
                 }
                 System.out.println("\n⚠️⚠️ The Selected Cell is already filled ⚠️⚠️");
