@@ -54,42 +54,34 @@ public abstract class Board {
     }
 
     public boolean checkDiagonal() {
-//        boolean primaryDiagonalResult = true;
-//        boolean secondaryDiagonalResult = true;
-//        char primaryDiagonalSymbol = this.board.getFirst().getFirst();
-//        char secondaryDiagonalSymbol = this.board.getFirst().getLast();
-//
-//        for(int row = 0; row < BOARD_SIZE; row++){
-//            for(int col = 0; col < BOARD_SIZE; col++){
-//                if(row == col){
-//                    primaryDiagonalResult = primaryDiagonalResult & (primaryDiagonalSymbol == this.board.get(row).get(col) && this.board.get(row).get(col) != ' ');
+        boolean primaryDiagonalResult = true;
+        boolean secondaryDiagonalResult = true;
+        char primaryDiagonalSymbol = this.board.getFirst().getFirst();
+        char secondaryDiagonalSymbol = this.board.getFirst().getLast();
+
+        for(int row = 0; row < BOARD_SIZE; row++){
+            for(int col = 0; col < BOARD_SIZE; col++){
+                if(row == col){
+                    primaryDiagonalResult = primaryDiagonalResult && (primaryDiagonalSymbol == this.board.get(row).get(col) && this.board.get(row).get(col) != ' ');
 //                    System.out.println(row + " " + col + " " + primaryDiagonalSymbol + " "+ primaryDiagonalResult);
-//
-//                }
-//                else if (col == (BOARD_SIZE-1-row)){
-//                    secondaryDiagonalResult = secondaryDiagonalResult & (secondaryDiagonalSymbol == this.board.get(row).get(col) && this.board.get(row).get(col) != ' ');
+
+                }
+                else if (col == (BOARD_SIZE-1-row)){
+                    secondaryDiagonalResult = secondaryDiagonalResult && (secondaryDiagonalSymbol == this.board.get(row).get(col) && this.board.get(row).get(col) != ' ');
 //                    System.out.println(row + " " + col +" " + secondaryDiagonalSymbol + " " + secondaryDiagonalResult);
-//                }
-//            }
-//            if(primaryDiagonalResult){
-//                this.winningSym = primaryDiagonalSymbol;
-//                System.out.println("Primary Result: "+primaryDiagonalSymbol);
-//                break;
-//            }
-//            if(secondaryDiagonalResult){
-//                System.out.println("Secondary Result: "+secondaryDiagonalSymbol);
-//                this.winningSym = secondaryDiagonalSymbol;
-//                break;
-//            }
-//        }
-//
-//        return primaryDiagonalResult | secondaryDiagonalResult;
-        boolean result = board.getFirst().getFirst() == board.get(1).get(1) && board.get(1).get(1) == board.get(2).get(2);
-        result = result || board.get(0).get(2) == board.get(1).get(1) && board.get(1).get(1) == board.get(2).getFirst();
-        if (result) {
-            winningSym = board.get(1).get(1);
+                }
+            }
         }
-        return result && winningSym != ' ';
+        if(primaryDiagonalResult){
+            this.winningSym = primaryDiagonalSymbol;
+//            System.out.println("Primary Result: "+primaryDiagonalSymbol);
+        }
+        if(secondaryDiagonalResult){
+            this.winningSym = secondaryDiagonalSymbol;
+//            System.out.println("Secondary Result: "+secondaryDiagonalSymbol);
+        }
+
+        return primaryDiagonalResult || secondaryDiagonalResult;
     }
 
     public boolean checkVertical() {
@@ -102,7 +94,7 @@ public abstract class Board {
                 result = result & (this.board.get(row).get(col) == currentSymbol && this.board.get(row).get(col) != ' ');
             }
             if(result){
-                System.out.println("In Check vertical: " + currentSymbol);
+//                System.out.println("In Check vertical: " + currentSymbol);
                 this.winningSym = currentSymbol;
                 break;
             }
@@ -120,7 +112,7 @@ public abstract class Board {
                 result = result & (this.board.get(row).get(col) == currentSymbol && this.board.get(row).get(col) != ' ');
             }
             if(result){
-                System.out.println("In Check Horizontal: " + currentSymbol);
+//                System.out.println("In Check Horizontal: " + currentSymbol);
                 this.winningSym = currentSymbol;
                 break;
             }

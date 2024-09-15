@@ -63,7 +63,9 @@ public class Human extends Gamer {
                     game.getBoard().emptyCells.remove(index);
                   return getRowAndColFromIdx(index);
                 }
-                System.out.println("\n⚠️⚠️ The Selected Cell is already filled ⚠️⚠️");
+                else {
+                    System.out.println("\n⚠️⚠️ The Selected Cell is already filled ⚠️⚠️");
+                }
             }
         }
     }

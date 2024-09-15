@@ -77,7 +77,7 @@ public class TicTacToe extends Game {
                 System.out.println("Board");
                 this.board.printBoard();
                 if (isGameOver(human.getNumberOfMoves(),computer.getNumberOfMoves()) || ((human.getNumberOfMoves() + computer.getNumberOfMoves()) == (TicTacToeBoard.BOARD_SIZE * TicTacToeBoard.BOARD_SIZE)) ) {
-                    System.out.println("IN IF");
+//                    System.out.println("IN IF");
                     break;
                 }
                 System.out.println("========== Computer's Turn ==========");
@@ -143,7 +143,7 @@ public class TicTacToe extends Game {
 
     @Override
     public void quit() {
-        System.out.println("The old.game Has Been Terminated!!!!");
+        System.out.println("The Game Has Been Terminated!!!!");
         exit(0);
 
     }
