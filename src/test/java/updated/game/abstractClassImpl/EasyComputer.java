@@ -7,6 +7,10 @@ import java.util.List;
 
 public class EasyComputer extends Gamer {
 
+    EasyComputer(){
+        super();
+        gamerName = "Computer";
+    }
     @Override
     public void getSymbolFromUser() {
     }

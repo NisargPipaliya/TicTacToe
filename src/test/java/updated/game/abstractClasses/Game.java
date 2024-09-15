@@ -1,5 +1,4 @@
 package updated.game.abstractClasses;
-import updated.game.abstractClasses.*;
 import lombok.Getter;
 
 @Getter
@@ -18,5 +17,5 @@ public abstract class Game {
     public abstract boolean askForRematch();
     public abstract void printStats();
     public abstract void quit();
-    public abstract boolean isGameOver(int gamer1Moves, int gamer2Moves);
+    public abstract boolean isGameOver();
 }

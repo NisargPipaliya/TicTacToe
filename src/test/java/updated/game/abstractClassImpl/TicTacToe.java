@@ -10,6 +10,9 @@ import static java.lang.System.exit;
 public class TicTacToe extends Game {
     Human human;
     Gamer computer;
+    private final char SYMBOL_X = 'X';
+    private final char SYMBOL_O = 'O';
+    private final String SYMBOL_BAR = " | ";
     public TicTacToe(){
         super();
         human = new Human();
@@ -20,18 +23,17 @@ public class TicTacToe extends Game {
 
     @Override
     public void printInstructions() {
-        System.out.println("******************************");
-        System.out.printf("%20s", "Welcome \uD83D\uDC4B \uD83D\uDC4B \n");
-        //
-        System.out.println("⚠️Press Q to Quit on going old.game.⚠️ \n\n");
-        System.out.println("The board will be as");
         StringBuilder cliResult = new StringBuilder();
+        cliResult.append("*".repeat(30));
+        cliResult.append("%20s".formatted("Welcome \uD83D\uDC4B \uD83D\uDC4B \n"));
+        cliResult.append("⚠️Press Q to Quit on going old.game.⚠️ \n\n");
+        cliResult.append("The board will be as\n");
         for (int i = 0; i < Board.BOARD_SIZE; i++) {
             for (int j = 0; j < Board.BOARD_SIZE; j++) {
                 if (j != (Board.BOARD_SIZE - 1))
-                    cliResult.append("X").append("|");
+                    cliResult.append(SYMBOL_X).append(SYMBOL_BAR);
                 else
-                    cliResult.append('X').append("\n");
+                    cliResult.append(SYMBOL_X).append("\n");
             }
             if (i != (Board.BOARD_SIZE - 1))
                 cliResult.append("-".repeat(TicTacToeBoard.BOARD_SIZE*TicTacToeBoard.BOARD_SIZE)).append("\n");
@@ -42,7 +44,7 @@ public class TicTacToe extends Game {
         for (int i = 0; i < Board.BOARD_SIZE; i++) {
             for (int j = 0; j < Board.BOARD_SIZE; j++) {
                 if (j != (Board.BOARD_SIZE - 1))
-                    cliResult.append(k).append(" | ");
+                    cliResult.append(k).append(SYMBOL_BAR);
                 else
                     cliResult.append(k).append("\n");
                 k++;
@@ -50,15 +52,16 @@ public class TicTacToe extends Game {
             if (i != (Board.BOARD_SIZE - 1))
                 cliResult.append("-".repeat(TicTacToeBoard.BOARD_SIZE*TicTacToeBoard.BOARD_SIZE)).append("\n");
         }
-        cliResult.append("******************************\n");
-        cliResult.append("\n******************************\n");
+        cliResult.append("*".repeat(30)).append("\n");
+        cliResult.append("*".repeat(30)).append("\n");
+
         System.out.println(cliResult);
 
         human.getUserNameFromCli();
         human.getSymbolFromUser();
-        computer.setSymbol((human.getSymbol() == 'O') ? 'X' : 'O');
+        computer.setSymbol((human.getSymbol() == SYMBOL_O) ? SYMBOL_X : SYMBOL_O);
         human.printDetails();
-        System.out.println("******************************");
+        System.out.println("*".repeat(30));
     }
 
     @Override
@@ -69,40 +72,49 @@ public class TicTacToe extends Game {
             System.out.println("\n\nCurrent Status");
             this.board.printBoard();
 
-            while (!isGameOver(human.getNumberOfMoves(),computer.getNumberOfMoves())) {
-                System.out.printf("========== %s's Turn ==========\n", human.getGamerName());
-                List<Integer> rowAndCol = human.getInputFromUser(this);
-                board.userMove(human, rowAndCol.get(0), rowAndCol.get(1));
-                System.out.println("Board");
-                this.board.printBoard();
-                if (isGameOver(human.getNumberOfMoves(),computer.getNumberOfMoves()) || ((human.getNumberOfMoves() + computer.getNumberOfMoves()) == (TicTacToeBoard.BOARD_SIZE * TicTacToeBoard.BOARD_SIZE)) ) {
-//                    System.out.println("IN IF");
+            while (!isGameOver()) {
+                if(human.getSymbol() == SYMBOL_X){
+                    this.gamerMove(human);
+                }else{
+                    this.gamerMove(computer);
+                }
+                if (isGameOver() || (this.board.getEmptyCells().isEmpty()) ) {
                     break;
                 }
-                System.out.println("========== Computer's Turn ==========");
-                rowAndCol = computer.getInputFromUser(this);
-                this.board.userMove(computer, rowAndCol.getFirst(), rowAndCol.get(1));
-                System.out.println("Board");
-                this.board.printBoard();
+                if(human.getSymbol() == SYMBOL_O){
+                    this.gamerMove(human);
+                }else{
+                    this.gamerMove(computer);
+                }
                 System.out.println("\n\n");
             }
-
-            char winningSym = board.getWinningSym();
-            if (winningSym == human.getSymbol() ) {
-                System.out.printf("You Won %s, \uD83C\uDF89\uD83D\uDCAB\n", human.getGamerName());
-                human.incrementScore();
-            }
-            else if (winningSym == computer.getSymbol()) {
-                System.out.println("Winner is Computer.");
-                computer.incrementScore();
-            }
-            else {
-                System.out.println("It's A Draw");
-            }
+            this.declareWinner();
             this.printStats();
             this.playGame = this.askForRematch();
         }while (this.playGame);
 
+    }
+    public void gamerMove(Gamer gamer){
+        System.out.printf("========== %s's Turn ==========\n", gamer.getGamerName());
+        List<Integer> rowAndCol = gamer.getInputFromUser(this);
+        board.userMove(gamer, rowAndCol.get(0), rowAndCol.get(1));
+        System.out.println("Board");
+        this.board.printBoard();
+    }
+
+    public void declareWinner(){
+        char winningSym = this.board.getWinningSym();
+        if (winningSym == this.human.getSymbol() ) {
+            System.out.printf("You Won %s, \uD83C\uDF89\uD83D\uDCAB\n", this.human.getGamerName());
+            this.human.incrementScore();
+        }
+        else if (winningSym == this.computer.getSymbol()) {
+            System.out.println("Winner is Computer.");
+            this.computer.incrementScore();
+        }
+        else {
+            System.out.println("It's A Draw");
+        }
     }
 
     @Override
@@ -117,7 +129,7 @@ public class TicTacToe extends Game {
                 computer.reset();
 //                System.out.println("Human: "+human.getNumberOfMoves());
                 human.getSymbolFromUser();
-                computer.setSymbol((human.getSymbol() == 'O') ? 'X' : 'O');
+                computer.setSymbol((human.getSymbol() == SYMBOL_O) ? SYMBOL_X : SYMBOL_O);
                 this.board.initEmptyCells();
                 this.numberOfMatches++;
                 return true;
@@ -148,9 +160,9 @@ public class TicTacToe extends Game {
     }
 
     @Override
-    public boolean isGameOver(int gamer1Moves, int gamer2Moves) {
-        if (gamer1Moves >= 3 || gamer2Moves >= 3) {
-            return (this.board.checkHorizontal() || this.board.checkVertical() || this.board.checkDiagonal());
+    public boolean isGameOver() {
+        if (this.board.getEmptyCells().size() <= (TicTacToeBoard.BOARD_SIZE * 2 -1)) {
+            return (this.board.checkRowAndColumn()   || this.board.checkDiagonal());
         }
         return false;
     }
