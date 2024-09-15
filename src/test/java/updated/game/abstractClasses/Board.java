@@ -85,8 +85,8 @@ public abstract class Board {
     }
 
     public boolean checkVertical() {
-        boolean result = true;
-        char currentSymbol = ' ';
+        boolean result;
+        char currentSymbol;
         for(int col = 0; col < BOARD_SIZE; col++){
             currentSymbol = this.board.getFirst().get(col);
             result = true;
@@ -103,8 +103,8 @@ public abstract class Board {
     }
 
     public boolean checkHorizontal() {
-        boolean result = true;
-        char currentSymbol = ' ';
+        boolean result;
+        char currentSymbol;
         for(int row = 0; row < BOARD_SIZE; row++){
             currentSymbol = this.board.get(row).getFirst();
             result = true;
@@ -137,6 +137,6 @@ public abstract class Board {
                 cliResult.append("\n");
             }
         }
-        System.out.print(cliResult.toString());
+        System.out.print(cliResult);
     }
 }

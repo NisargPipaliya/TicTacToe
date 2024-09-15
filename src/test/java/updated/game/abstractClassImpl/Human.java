@@ -4,7 +4,6 @@ import updated.game.abstractClasses.Game;
 import updated.game.abstractClasses.Gamer;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Human extends Gamer {
@@ -48,9 +47,7 @@ public class Human extends Gamer {
 
     @Override
     public List<Integer> getInputFromUser(Game game) {
-        int idx = 0;
         System.out.println("Where to place your symbol?  ");
-        List<Integer> rowAndCol;
 
         while (true) {
             String s = sc.nextLine().trim();

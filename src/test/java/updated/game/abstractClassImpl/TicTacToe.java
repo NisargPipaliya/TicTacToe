@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Scanner;
 
 import static java.lang.System.exit;
-import updated.game.abstractClasses.*;
 
 public class TicTacToe extends Game {
     Human human;
@@ -53,7 +52,7 @@ public class TicTacToe extends Game {
         }
         cliResult.append("******************************\n");
         cliResult.append("\n******************************\n");
-        System.out.println(cliResult.toString());
+        System.out.println(cliResult);
 
         human.getUserNameFromCli();
         human.getSymbolFromUser();
