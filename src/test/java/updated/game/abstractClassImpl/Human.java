@@ -16,20 +16,7 @@ public class Human extends Gamer {
         sc = new Scanner(System.in);
     }
 
-    public void getUserNameFromCli(){
-        System.out.println("Enter Your UserName: ");
-        String s;
-        while (true) {
-            s = sc.nextLine();
-            if (s.isEmpty()) {
-                System.out.println("!! Please enter your name !!");
-            }
-            else {
-                this.gamerName = s.trim();
-                break;
-            }
-        }
-    }
+
     @Override
     public void getSymbolFromUser() {
         String initInst ="\nSelect your symbol (%c or %c):\n".formatted(SYMBOL_O,SYMBOL_X)

@@ -1,6 +1,7 @@
 package updated.game.abstractClassImpl;
 
 import updated.game.abstractClasses.*;
+import updated.game.constants.Level;
 
 import java.util.List;
 import java.util.Scanner;
@@ -8,7 +9,7 @@ import java.util.Scanner;
 import static java.lang.System.exit;
 
 public class TicTacToe extends Game {
-    Human human;
+    Gamer human;
     Gamer computer;
     private final char SYMBOL_X = 'X';
     private final char SYMBOL_O = 'O';
@@ -16,16 +17,14 @@ public class TicTacToe extends Game {
     public TicTacToe(){
         super();
         human = new Human();
-        computer = new MediumLevel();
         this.board = new TicTacToeBoard();
-
     }
 
     @Override
     public void printInstructions() {
         StringBuilder cliResult = new StringBuilder();
         cliResult.append("*".repeat(30));
-        cliResult.append("%20s".formatted("Welcome \uD83D\uDC4B \uD83D\uDC4B \n"));
+        cliResult.append("%20s".formatted("\nWelcome \uD83D\uDC4B \uD83D\uDC4B \n"));
         cliResult.append("⚠️Press Q to Quit on going old.game.⚠️ \n\n");
         cliResult.append("The board will be as\n");
         for (int i = 0; i < Board.BOARD_SIZE; i++) {
@@ -56,17 +55,26 @@ public class TicTacToe extends Game {
         cliResult.append("*".repeat(30)).append("\n");
 
         System.out.println(cliResult);
+        System.out.println("*".repeat(30));
 
+    }
+
+    public void initComputer(){
+        Level level = this.askForLevel();
+        this.computer = ComputerFactory.getComputer(level);
+        computer.setSymbol((human.getSymbol() == SYMBOL_O) ? SYMBOL_X : SYMBOL_O);
+    }
+    public void getUserNameAndSymbolFromCli(){
         human.getUserNameFromCli();
         human.getSymbolFromUser();
-        computer.setSymbol((human.getSymbol() == SYMBOL_O) ? SYMBOL_X : SYMBOL_O);
         human.printDetails();
-        System.out.println("*".repeat(30));
     }
 
     @Override
     public void play() {
         this.printInstructions();
+        this.getUserNameAndSymbolFromCli();
+        this.initComputer();
         do{
             System.out.println("\n\nLet's Begin \uD83C\uDFB2");
             System.out.println("\n\nCurrent Status");
@@ -97,6 +105,7 @@ public class TicTacToe extends Game {
     public void gamerMove(Gamer gamer){
         System.out.printf("========== %s's Turn ==========\n", gamer.getGamerName());
         List<Integer> rowAndCol = gamer.getInputFromUser(this);
+             System.out.println(rowAndCol.get(0)+" "+ rowAndCol.get(1));
         board.userMove(gamer, rowAndCol.get(0), rowAndCol.get(1));
         System.out.println("Board");
         this.board.printBoard();
