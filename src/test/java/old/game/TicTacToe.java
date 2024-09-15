@@ -253,9 +253,9 @@ public class TicTacToe implements Game2Player {
                 if (isGameOver() || (X + O) == 9 ) {
                     break;
                 }
-                System.out.println("========== Computer's Turn ==========");
+                System.out.println("========== MediumLevel's Turn ==========");
                 rowAndCol = getComputerInput();
-                userMove("Computer", computerSym, rowAndCol.getFirst(), rowAndCol.get(1));
+                userMove("MediumLevel", computerSym, rowAndCol.getFirst(), rowAndCol.get(1));
                 System.out.println("Board");
                 printStatus();
                 System.out.println("\n\n");
@@ -266,7 +266,7 @@ public class TicTacToe implements Game2Player {
                 currentUserSocre++;
             }
             else if (winningSym == computerSym) {
-                System.out.println("Winner is Computer.");
+                System.out.println("Winner is MediumLevel.");
                 currentComputerScore++;
             }
             else
@@ -323,7 +323,7 @@ public class TicTacToe implements Game2Player {
         System.out.println("Let's Look at stats till now.");
         System.out.printf("Number of Matches: %d\n", numberOfMatches);
         System.out.printf("%s's Score: %d\n", this.userName, this.currentUserSocre);
-        System.out.printf("Computer's Score: %d\n", this.currentComputerScore);
+        System.out.printf("MediumLevel's Score: %d\n", this.currentComputerScore);
         System.out.println("******************************");
     }
 

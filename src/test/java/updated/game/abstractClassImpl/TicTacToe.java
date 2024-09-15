@@ -16,7 +16,7 @@ public class TicTacToe extends Game {
     public TicTacToe(){
         super();
         human = new Human();
-        computer = new EasyComputer();
+        computer = new MediumLevel();
         this.board = new TicTacToeBoard();
 
     }
@@ -109,7 +109,7 @@ public class TicTacToe extends Game {
             this.human.incrementScore();
         }
         else if (winningSym == this.computer.getSymbol()) {
-            System.out.println("Winner is Computer.");
+            System.out.println("Winner is MediumLevel.");
             this.computer.incrementScore();
         }
         else {
@@ -146,7 +146,7 @@ public class TicTacToe extends Game {
                 "Let's Look at stats till now.\n" +
                 "Number of Matches: %d\n".formatted(numberOfMatches) +
                 "%s's Score: %d\n".formatted(human.getGamerName(), human.getCurrentScore()) +
-                "Computer's Score: %d\n".formatted(computer.getCurrentScore()) +
+                "MediumLevel's Score: %d\n".formatted(computer.getCurrentScore()) +
                 "*".repeat(30)+"\n";
         System.out.println(cliResult);
     }
