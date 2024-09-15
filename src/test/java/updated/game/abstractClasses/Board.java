@@ -15,6 +15,8 @@ public abstract class Board {
     public Set<Integer> emptyCells;
     public char winningSym;
     public final char EMPTY_SPACE=' ';
+    private final String SYMBOL_BAR = " | ";
+
 
     public Board(){
         emptyCells = new LinkedHashSet<>(BOARD_SIZE*BOARD_SIZE);
@@ -32,7 +34,7 @@ public abstract class Board {
                 i++;
             this.emptyCells.add(i);
         }
-        this.winningSym = ' ';
+        this.winningSym = EMPTY_SPACE;
 
         if (this.board != null) {
             this.board.clear();
@@ -41,7 +43,7 @@ public abstract class Board {
         for (int row = 0; row < BOARD_SIZE; row++) {
             this.board.add(new ArrayList<>(BOARD_SIZE));
             for (int col = 0; col < BOARD_SIZE; col++) {
-                this.board.get(row).add(' ');
+                this.board.get(row).add(EMPTY_SPACE);
             }
         }
     }
@@ -50,7 +52,6 @@ public abstract class Board {
     }
   
     public void userMove(Gamer gamer, int row, int col){
-        gamer.incrementNumberOfMoves();
         this.board.get(row).set(col, gamer.getSymbol());
     }
 
@@ -63,63 +64,23 @@ public abstract class Board {
         for(int row = 0; row < BOARD_SIZE; row++){
             for(int col = 0; col < BOARD_SIZE; col++){
                 if(row == col){
-                    primaryDiagonalResult = primaryDiagonalResult && (primaryDiagonalSymbol == this.board.get(row).get(col) && this.board.get(row).get(col) != ' ');
-//                    System.out.println(row + " " + col + " " + primaryDiagonalSymbol + " "+ primaryDiagonalResult);
-
+                    primaryDiagonalResult = primaryDiagonalResult && (primaryDiagonalSymbol == this.board.get(row).get(col) && this.board.get(row).get(col) != EMPTY_SPACE);
                 }
                 if (col == (BOARD_SIZE-1-row)){
-                    secondaryDiagonalResult = secondaryDiagonalResult && (secondaryDiagonalSymbol == this.board.get(row).get(col) && this.board.get(row).get(col) != ' ');
-//                    System.out.println(row + " " + col +" " + secondaryDiagonalSymbol + " " + secondaryDiagonalResult + " " + primaryDiagonalSymbol + " " + (BOARD_SIZE-1-row));
+                    secondaryDiagonalResult = secondaryDiagonalResult && (secondaryDiagonalSymbol == this.board.get(row).get(col) && this.board.get(row).get(col) != EMPTY_SPACE);
                 }
             }
         }
         if(primaryDiagonalResult){
             this.winningSym = primaryDiagonalSymbol;
-//            System.out.println("Primary Result: "+primaryDiagonalSymbol);
         }
         if(secondaryDiagonalResult){
             this.winningSym = secondaryDiagonalSymbol;
-//            System.out.println("Secondary Result: "+secondaryDiagonalSymbol);
         }
 
         return primaryDiagonalResult || secondaryDiagonalResult;
     }
 
-//    public boolean checkVertical() {
-//        boolean result;
-//        char currentSymbol;
-//        for(int col = 0; col < BOARD_SIZE; col++){
-//            currentSymbol = this.board.getFirst().get(col);
-//            result = true;
-//            for(int row = 0; row < BOARD_SIZE; row++){
-//                result = result & (this.board.get(row).get(col) == currentSymbol && this.board.get(row).get(col) != ' ');
-//            }
-//            if(result){
-////                System.out.println("In Check vertical: " + currentSymbol);
-//                this.winningSym = currentSymbol;
-//                break;
-//            }
-//        }
-//        return this.winningSym != ' ';
-//    }
-//
-//    public boolean checkHorizontal() {
-//        boolean result;
-//        char currentSymbol;
-//        for(int row = 0; row < BOARD_SIZE; row++){
-//            currentSymbol = this.board.get(row).getFirst();
-//            result = true;
-//            for(int col = 0 ; col < BOARD_SIZE; col++){
-//                result = result & (this.board.get(row).get(col) == currentSymbol && this.board.get(row).get(col) != ' ');
-//            }
-//            if(result){
-////                System.out.println("In Check Horizontal: " + currentSymbol);
-//                this.winningSym = currentSymbol;
-//                break;
-//            }
-//        }
-//        return this.winningSym != ' ';
-//    }
 
     public boolean checkRowAndColumn(){
         boolean rowResult, colResult;
@@ -134,25 +95,22 @@ public abstract class Board {
                 colResult = colResult & (this.board.get(col).get(row) == colSymbol && this.board.get(col).get(row) != EMPTY_SPACE);
             }
             if(rowResult){
-//                System.out.println("In Check Horizontal: " + currentSymbol);
                 this.winningSym = rowSymbol;
-//                System.out.println("SYM: " + rowSymbol);
                 break;
             }
             else if(colResult){
                 this.winningSym = colSymbol;
-//                System.out.println("SYM: " + colSymbol);
                 break;
             }
         }
-        return this.winningSym != ' ';
+        return this.winningSym != EMPTY_SPACE;
     }
     public void printBoard() {
         StringBuilder cliResult = new StringBuilder();
         for (int row = 0; row < BOARD_SIZE; row++) {
             for (int col = 0; col < BOARD_SIZE; col++) {
                 if (col != (BOARD_SIZE - 1)) {
-                  cliResult.append(board.get(row).get(col)).append(" | ");
+                  cliResult.append(board.get(row).get(col)).append(SYMBOL_BAR);
                 }
                 else {
                   cliResult.append(board.get(row).get(col));

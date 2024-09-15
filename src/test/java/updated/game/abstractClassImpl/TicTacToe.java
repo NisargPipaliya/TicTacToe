@@ -127,7 +127,6 @@ public class TicTacToe extends Game {
                 this.printStats();
                 human.reset();
                 computer.reset();
-//                System.out.println("Human: "+human.getNumberOfMoves());
                 human.getSymbolFromUser();
                 computer.setSymbol((human.getSymbol() == SYMBOL_O) ? SYMBOL_X : SYMBOL_O);
                 this.board.initEmptyCells();
@@ -143,12 +142,12 @@ public class TicTacToe extends Game {
 
     @Override
     public void printStats() {
-        String cliResult = "******************************\n" +
+        String cliResult = "*".repeat(30)+"\n" +
                 "Let's Look at stats till now.\n" +
                 "Number of Matches: %d\n".formatted(numberOfMatches) +
                 "%s's Score: %d\n".formatted(human.getGamerName(), human.getCurrentScore()) +
                 "Computer's Score: %d\n".formatted(computer.getCurrentScore()) +
-                "******************************\n";
+                "*".repeat(30)+"\n";
         System.out.println(cliResult);
     }
 
