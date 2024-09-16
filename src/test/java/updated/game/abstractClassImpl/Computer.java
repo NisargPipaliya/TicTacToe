@@ -13,6 +13,7 @@ public abstract class Computer extends Gamer {
     }
 
     public abstract int getEmptyIndex(Game game);
+
     @Override
     public void getSymbolFromUser() {
     }
@@ -20,6 +21,7 @@ public abstract class Computer extends Gamer {
     @Override
     public List<Integer> getInputFromUser(Game game) {
         int index = getEmptyIndex(game);
+        System.out.println(index);
         game.getBoard().emptyCells.remove(index);
         return getRowAndColFromIdx(index);
     }

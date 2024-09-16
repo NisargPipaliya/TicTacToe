@@ -1,5 +1,6 @@
 package updated.game.abstractClassImpl;
 
+import updated.game.abstractClasses.Board;
 import updated.game.abstractClasses.Game;
 import updated.game.abstractClasses.Gamer;
 
@@ -64,8 +65,19 @@ public class Human extends Gamer {
         this.currentScore++;
 
     }
+
+    private int getInputSize(){
+        int size = 0;
+        int temp = TicTacToeBoard.BOARD_SIZE * TicTacToeBoard.BOARD_SIZE;
+        while(temp != 0){
+            temp /= 10;
+            size++;
+        }
+        return size;
+    }
+
     public boolean validateInput(String s){
-        if (s.matches("\\d{2}")) {
+        if (s.matches("\\d{%d}".formatted(getInputSize()))) {
             int index = Integer.parseInt(s);
             int size = TicTacToeBoard.BOARD_SIZE * TicTacToeBoard.BOARD_SIZE;
           if (!(index >= 1 && index <= size)) {

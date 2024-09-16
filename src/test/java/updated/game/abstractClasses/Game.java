@@ -21,6 +21,7 @@ public abstract class Game {
     public abstract void printStats();
     public abstract void quit();
     public abstract boolean isGameOver();
+    public abstract void printWelcome();
     public Level askForLevel(){
         Scanner sc = new Scanner(System.in);
         System.out.println("*".repeat(30));
