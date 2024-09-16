@@ -1,7 +1,6 @@
 package updated.game.abstractClasses;
 
 import lombok.Getter;
-import lombok.Setter;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;

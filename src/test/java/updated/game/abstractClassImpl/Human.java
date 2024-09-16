@@ -1,6 +1,5 @@
 package updated.game.abstractClassImpl;
 
-import updated.game.abstractClasses.Board;
 import updated.game.abstractClasses.Game;
 import updated.game.abstractClasses.Gamer;
 
