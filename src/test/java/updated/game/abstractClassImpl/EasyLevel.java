@@ -11,10 +11,10 @@ public class EasyLevel extends Computer {
         int index = 0;
         for(var row : game.getBoard().getBoard()){
             for(var col:row){
+                index++;
                 if(col == game.getBoard().EMPTY_SPACE){
                     return index;
                 }
-                index++;
             }
         }
         return 0;
