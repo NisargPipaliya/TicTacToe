@@ -1,9 +1,7 @@
 package updated.game.abstractClassImpl;
 
 import updated.game.abstractClasses.Game;
-import updated.game.abstractClasses.Gamer;
 
-import java.util.List;
 
 public class EasyLevel extends Computer {
     @Override
