@@ -8,5 +8,8 @@ public class TicTacToeBoard extends Board {
         super();
     }
 
-
+    public static void setBoardSize(int boardSize){
+       Board.setBoardSize(boardSize);
+       TicTacToeBoard.BOARD_SIZE = boardSize;
+    }
 }

@@ -16,20 +16,7 @@ public class Human extends Gamer {
         sc = new Scanner(System.in);
     }
 
-    public void getUserNameFromCli(){
-        System.out.println("Enter Your UserName: ");
-        String s;
-        while (true) {
-            s = sc.nextLine();
-            if (s.isEmpty()) {
-                System.out.println("!! Please enter your name !!");
-            }
-            else {
-                this.gamerName = s.trim();
-                break;
-            }
-        }
-    }
+
     @Override
     public void getSymbolFromUser() {
         String initInst ="\nSelect your symbol (%c or %c):\n".formatted(SYMBOL_O,SYMBOL_X)
@@ -77,8 +64,19 @@ public class Human extends Gamer {
         this.currentScore++;
 
     }
+
+    private int getInputSize(){
+        int size = 0;
+        int temp = TicTacToeBoard.BOARD_SIZE * TicTacToeBoard.BOARD_SIZE;
+        while(temp != 0){
+            temp /= 10;
+            size++;
+        }
+        return size;
+    }
+
     public boolean validateInput(String s){
-        if (s.matches("\\d{2}")) {
+        if (s.matches("\\d{%d}".formatted(getInputSize()))) {
             int index = Integer.parseInt(s);
             int size = TicTacToeBoard.BOARD_SIZE * TicTacToeBoard.BOARD_SIZE;
           if (!(index >= 1 && index <= size)) {

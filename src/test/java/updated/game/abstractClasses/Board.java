@@ -24,6 +24,9 @@ public abstract class Board {
 
     }
 
+    public static void setBoardSize(int boardSize){
+        BOARD_SIZE = boardSize;
+    }
 
     public void initEmptyCells(){
         SecureRandom randomNumGen = new SecureRandom();
@@ -53,6 +56,7 @@ public abstract class Board {
   
     public void userMove(Gamer gamer, int row, int col){
         this.board.get(row).set(col, gamer.getSymbol());
+    System.out.println(this.board.get(row).get(col));
     }
 
     public boolean checkDiagonal() {
