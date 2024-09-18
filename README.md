@@ -1,85 +1,36 @@
-# TicTacToe old.game 🎲 Implementation details
+# 🎮 Nic-Nac-Noe
 
-## Interface
+Welcome to Nic-Nac-Noe game a special version of Tic-Tac-Toe! 😊 Take a look at the fun features I’ve added:
 
-- ### Game2Player
-  - Interface for playing 2 player games.
-  - Inherited by `TicTacToe` class
-  - #### Methods
-    - play()
-    - quit()
-    - userMove()
-    - askForRematch()
-    - printStatus()
-    - printInstructions()
+## 🌟 What's Special About This Game?
 
-## Class
+- 🤖 Play against the computer
+- 🔢 Choose how big you want the game board to be
+- 🔁 Play again easily after each game
+- 📊 Keep track of your wins
+- 🎭 Make the game just how you like it
 
-- ###  Class Variables
-    - userName 
-    - userSym -> To store user's symbol
-    - computerSym
-    - winningSym -> Which symbol is winner
-    - currentUserScore -> to store number of games won by user
-    - currentComputerScore 
-    - numberOfRematch 
-    - boardSize
-    - board -> 2D array to visualize moves
-    - X, O -> Integer variable to keep track of number of moves made
-    - Scanner Object -> to take input in all the methods
-    - EmptyCells -> set of integers between 1 to 9, randomly
-    - playGame -> boolean variable indicating that should continue playing old.game or not
-- ### Methods
-  - initEmptyCells() 
-    - Initialize emptyCells set
-    - Initialize winningSym variable to `space(' ')`
-    - Initialize `board`
-  - printInstructions()
-    - Prints `welcome` message
-    - Prints general instruction to play old.game
-    - Get input of `userName` and `userSym`
-    - Calls `getSymFromUser` 
-    - Calls `printDetails`
-  - printDetails()
-    - Print details received from user.
-  - getSymFromUser()
-    - Get `userSym` as cli input and validate it.
-  - getInputFromUser()
-    - Takes input as cell number
-    - validates it and call `getRowAndColFromIdx`
-    - returns index of 2D array
-  - getComputerInput()
-    - Gets element from `emptyCell` set
-    - Convert it to 2D array Index by calling `getRowAndColFromIdx`
-    - Return this 2D array Index to caller
-  - checkCollision()
-    - Checks if cell where user wants to place his or her symbol is filled or not
-  - isGameOver()
-    - Calls `checkDiagonal`, `checkHorizontal`, `checkVertical` to check if any winning combination is made or not. 
-    - returns false if no user is winning
-  - userMove()
-    - Place symbol on the board
-  - Play()
-    - Calls `getInputFromUser`, `getComputerInput`
-    - Calls `userMove` for both above methods
-    - Calls `printStatus` 
-    - Calls `AskForRematch` at end of one match
-  - askForRematch()
-    - Ask user if he/she wants to have rematch or not
-    - Calls `printStats`, `getSymFromUser` and `initEmptyCells` if user wants to have rematch
-  - printStatus()
-    - Print current state of board
-  - printStats()
-    - Print old.game stats i.e. number of matches played, UserScore, ComputerScore
-  - quit()
-    - Close Scanner i/p stream
-    - Prints termination message
-    - Call exit(0)
+## 🕹️ How to Play
 
----
-# old.game Play
-![img.png](img.png)
+1. 🏁 Start the game and pick how big you want the board to be.
+2. 📝 Type in your name.
+3. 🔣 Choose if you want to be X or O.
+4. 🤖 Pick how smart you want the computer to be.
+5. 🎲 The game will choose who goes first.
+6. 🔢 Type the number of the spot where you want to put your X or O.
+7. 🏆 Try to get three of your symbols in a row to win!
+8. 🔄 After the game, you can play again or stop.
 
-![img_2.png](img_2.png)
+## 💡 Helpful Tips
 
-![img_1.png](img_1.png)
+- 🧐 Watch what the computer does - it might surprise you!
+- 🤔 Think about where to put your X or O before you choose.
+- 🏃‍♂️ If you need to stop playing, just type 'Q'.
+
+## 🚀 Ready to Play?
+
+Start the game and have fun! Good luck! 🍀
+
+----
+## 🏗️ How the Game is Built
+- For that My friend, you can read [Doc.md](./Doc.md)
