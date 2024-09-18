@@ -1,36 +1,26 @@
-# 🎮 Nic-Nac-Noe
+# Nic-Nac-Noe Game
 
-Welcome to Nic-Nac-Noe game a special version of Tic-Tac-Toe! 😊 Take a look at the fun features I’ve added:
+Welcome to Nic-Nac-Noe, a special version of Tic-Tac-Toe! Here’s an overview of the features:
 
-## 🌟 What's Special About This Game?
+## What's Special About This Game?
 
-- 🤖 Play against the computer
-- 🔢 Choose how big you want the game board to be
-- 🔁 Play again easily after each game
-- 📊 Keep track of your wins
-- 🎭 Make the game just how you like it
+- Play against the computer.
+- Choose the size of the game board.
+- Easily play again after each game.
+- Track your wins.
+- Customize game settings to your liking.
 
-## 🕹️ How to Play
+## How to Play
 
-1. 🏁 Start the game and pick how big you want the board to be.
-2. 📝 Type in your name.
-3. 🔣 Choose if you want to be X or O.
-4. 🤖 Pick how smart you want the computer to be.
-5. 🎲 The game will choose who goes first.
-6. 🔢 Type the number of the spot where you want to put your X or O.
-7. 🏆 Try to get three of your symbols in a row to win!
-8. 🔄 After the game, you can play again or stop.
+1. Start the game and select your board size.
+2. Enter your name.
+3. Choose whether you want to be X or O.
+4. Set the computer difficulty level.
+5. The game randomly selects who goes first.
+6. Type the number corresponding to the spot where you want to place your X or O.
+7. Aim to get three symbols in a row to win.
+8. After the game, choose to play again or exit.
 
-## 💡 Helpful Tips
+## Ready to Play?
 
-- 🧐 Watch what the computer does - it might surprise you!
-- 🤔 Think about where to put your X or O before you choose.
-- 🏃‍♂️ If you need to stop playing, just type 'Q'.
-
-## 🚀 Ready to Play?
-
-Start the game and have fun! Good luck! 🍀
-
-----
-## 🏗️ How the Game is Built
-- For that My friend, you can read [Doc.md](./Doc.md)
+Start the game and enjoy! Good luck!
